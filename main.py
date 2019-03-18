@@ -1,6 +1,31 @@
 from turtle import *
 
 
+
+def k(d,n):
+    if n == 0:
+        return
+    up()
+    right(20)
+    forward(d//4)
+    down()
+    for i in range(4):
+        forward(d)
+        right(90)
+    return k(d*0.9,n-1)
+
+def k_main():
+    up()
+    speed(7)
+    goto(-100, 0)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    k(a, n)
+    mainloop()
+
+
+
 def koch(order, size):
     if order == 0:
         forward(size)
@@ -62,7 +87,7 @@ def tree(n, d):
 
 def tree_main():
     up()
-    speed(7)
+    speed(0)
     left(90)
     goto(0, 0)
     down()
@@ -122,6 +147,7 @@ def led_1(order, size):
 
 def led_1_main():
     up()
+    speed(7)
     goto(-280,-100)
     down()
     n = int(input('Глубина рекурсии:'))
@@ -148,6 +174,7 @@ def led_2(order, size):
 
 def led_2_main():
     up()
+    speed(7)
     goto(-280,-100)
     down()
     n = int(input('Глубина рекурсии:'))
@@ -169,6 +196,7 @@ def levi(order, size):
 
 def levi_main():
     up()
+    speed(7)
     goto(-100,0)
     down()
     n = int(input('Глубина рекурсии:'))
@@ -201,6 +229,7 @@ def dragon_2(order, size):
 
 def dragon_main():
     up()
+    speed(0)
     goto(0,0)
     down()
     n = int(input('Глубина рекурсии:'))
@@ -209,12 +238,102 @@ def dragon_main():
     mainloop()
 
 
+def unt(a, n):
+
+    if a == 0:
+        forward(n)
+        right(90)
+        forward(n / 2)
+        backward(n / 2)
+        left(90)
+        forward(n / 2)
+        backward(n / 2)
+        left(90)
+        forward(n / 2)
+        backward(n / 2)
+        right(90)
+        backward(n)
+    else:
+
+        forward(n)
+        right(90)
+        unt(a - 1, n / 2)
+        left(180)
+        unt(a - 1, n / 2)
+        right(90)
+        unt(a - 1, n / 2)
+        backward(n)
+
+
+
+def lee(a, n):
+    if a == 0:
+        forward(n)
+        backward(n / 4)
+        left(90)
+        unt(a, n / 12)
+        right(90)
+        backward(n / 4)
+        left(90)
+        unt(a, n / 6)
+        right(90)
+        backward(n / 4)
+        left(90)
+        unt(a, n / 12)
+        right(90)
+        backward(n / 4)
+        forward(n)
+    else:
+        forward(n)
+        backward(n / 4)
+        left(90)
+        unt(a - 1, n / 12)
+        right(90)
+        backward(n / 4)
+        left(90)
+        unt(a - 1, n / 6)
+        right(90)
+        backward(n / 4)
+        left(90)
+        unt(a - 1, n / 12)
+        right(90)
+        backward(n / 4)
+        forward(n)
+
+
+
+
+
+def triple(a ,n):
+    for _ in range(3):
+        lee(a, n)
+        right(120)
+    forward(n)
+    right(180)
+    for _ in range(3):
+        lee(a, n)
+        left(120)
+
+
+def triple_main():
+    up()
+    speed(0)
+    goto(-200, 50)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    triple(n, a)
+    mainloop()
+
+
 def main():
     print('Построение фракталов:')
     print('1.Квадрат \n2.Двоичное дерево \n3.Кривая Коха \n4.Снежинка Коха \n'
           '5.Кривая Минковского \n6."Ледяной" фрактал 1 \n7."Ледяной" фрактал 2 \n'
-          '8.Кривая Леви \n9.Дракон Хартера-Хейтуэя')
+          '8.Кривая Леви \n9.Дракон Хартера-Хейтуэя \n10.Фрактальный треугольник')
     fractal = int(input('Построить фрактал: '))
+    if fractal == 1:
+        k_main()
     if fractal == 2:
         tree_main()
     if fractal == 3:
@@ -233,6 +352,8 @@ def main():
         levi_main()
     if fractal == 9:
         dragon_main()
+    if fractal == 10:
+        triple_main()
 
 if __name__ == '__main__':
     main()
