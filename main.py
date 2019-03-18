@@ -107,6 +107,108 @@ def mink_main():
     mainloop()
 
 
+def led_1(order, size):
+    if order == 0:
+        forward(size)
+    else:
+        led_1(order-1, size)
+        left(90)
+        led_1(order-1, size/2)
+        right(180)
+        led_1(order-1, size/2)
+        left(90)
+        led_1(order-1, size)
+
+
+def led_1_main():
+    up()
+    goto(-280,-100)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    led_1(n, a)
+
+
+def led_2(order, size):
+    if order == 0:
+        forward(size)
+    else:
+        led_2(order-1, size)
+        left(120)
+        led_2(order-1, size/2)
+        right(180)
+        led_2(order-1, size/2)
+        left(120)
+        led_2(order - 1, size / 2)
+        right(180)
+        led_2(order - 1, size / 2)
+        left(120)
+        led_2(order - 1, size)
+
+
+def led_2_main():
+    up()
+    goto(-280,-100)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    led_2(n, a)
+    mainloop()
+
+
+def levi(order, size):
+    if order == 0:
+        forward(size)
+    else:
+        left(45)
+        levi(order-1, size)
+        right(90)
+        levi(order-1, size)
+        left(45)
+
+
+def levi_main():
+    up()
+    goto(-100,0)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    levi(n, a)
+    mainloop()
+
+
+def dragon_1(order, size):
+    if order == 0:
+        forward(size)
+    else:
+        left(45)
+        dragon_1(order-1, size)
+        right(90)
+        dragon_2(order-1, size)
+        right(45)
+
+
+def dragon_2(order, size):
+    if order == 0:
+        forward(size)
+    else:
+        left(45)
+        dragon_1(order-1, size)
+        left(90)
+        dragon_2(order-1, size)
+        right(45)
+
+
+def dragon_main():
+    up()
+    goto(0,0)
+    down()
+    n = int(input('Глубина рекурсии:'))
+    a = int(input('Длина стороны:'))
+    dragon_1(n, a)
+    mainloop()
+
+
 def main():
     print('Построение фракталов:')
     print('1.Квадрат \n2.Двоичное дерево \n3.Кривая Коха \n4.Снежинка Коха \n'
@@ -123,7 +225,14 @@ def main():
         mink_main()
     if fractal == 2:
         tree_main()
-
+    if fractal == 6:
+        led_1_main()
+    if fractal == 7:
+        led_2_main()
+    if fractal == 8:
+        levi_main()
+    if fractal == 9:
+        dragon_main()
 
 if __name__ == '__main__':
     main()
